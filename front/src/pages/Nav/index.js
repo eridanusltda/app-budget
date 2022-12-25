@@ -16,9 +16,10 @@ export default function Nav() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ width: "100%", alignItems: "flex-end", display: "flex" }}>
       <BottomNavigation
         showLabels
+        sx={{ width: "100%" }}
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);

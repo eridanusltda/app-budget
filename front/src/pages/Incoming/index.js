@@ -4,11 +4,11 @@ import "./index.css";
 import CardAccordion from "../../components/CardAccordion";
 import Card from "../../components/Card";
 
-export default function Wallet() {
+export default function Incoming() {
   return (
     <Grid className="section_grid">
       <Typography variant="h5" className="title">
-        Carteira
+        Renda
       </Typography>
       <CardAccordion title="Renda" value="R$ 31000" />
       <Card title="Gastos" value="- R$ 1200" isRed />

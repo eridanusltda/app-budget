@@ -16,6 +16,8 @@ code {
 .title {
   text-align: center;
   color: #35794b;
+  padding-bottom: 10px;
+  font-size: 20px;
 }
 
 .text_cards {
@@ -24,6 +26,17 @@ code {
 
 .section_grid {
   width: 100%;
-  height: 100vh;
   padding: 20px;
+}
+
+.red_text {
+  color: #d81f1f;
+}
+
+.green_text {
+  color: #35794b;
+}
+
+.white_text {
+  color: #ffff;
 }

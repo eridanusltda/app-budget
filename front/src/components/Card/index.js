@@ -5,11 +5,23 @@ import "./index.css";
 export default function Card(props) {
   return (
     <Grid container className="grid_card_details card">
-      <Grid item xs={3} className="green_box">
-        <Typography className="text_cards white_text">1/2</Typography>
+      <Grid
+        item
+        xs={props.title === "Contas Pagas" ? 5 : 3}
+        className="green_box"
+      >
+        <Typography className="text_cards white_text">{props.title}</Typography>
       </Grid>
-      <Grid item xs={9} className="white_box">
-        <Typography className="text_cards green_text">R$ 20000</Typography>
+      <Grid
+        item
+        xs={props.title === "Contas Pagas" ? 7 : 9}
+        className="white_box"
+      >
+        <Typography
+          className={`text_cards ${props.isRed ? "red_text" : "green_text"}`}
+        >
+          {props.value}
+        </Typography>
       </Grid>
     </Grid>
   );

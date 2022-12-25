@@ -29,7 +29,7 @@ const AccordionSummary = styled((props) => (
   paddingLeft: 0,
   paddingRight: 10,
   borderRadius: "0px  10px",
-  backgroundColor: "rgba(255, 255, 255, 0.93);",
+  backgroundColor: "#f1f5f2",
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",
   },
@@ -39,12 +39,12 @@ const AccordionSummary = styled((props) => (
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  borderTop: "1px solid rgba(0, 0, 0, .125)",
+  borderTop: "1px solid transparent",
   padding: 0,
 }));
 
 export default function CardAccordion(props) {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState("");
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -57,15 +57,17 @@ export default function CardAccordion(props) {
         onChange={handleChange("panel1")}
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Grid container className="grid_card">
+          <Grid container className="grid_card_details">
             <Grid item xs={3} className="green_box">
               <Typography className="text_cards white_text">
                 {props.title}
               </Typography>
             </Grid>
-            <Typography className="text_cards green_text">
-              {props.value}
-            </Typography>
+            <Grid item xs={9} className="white_box">
+              <Typography className="text_cards green_text">
+                {props.value}
+              </Typography>
+            </Grid>
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
@@ -74,7 +76,7 @@ export default function CardAccordion(props) {
               <Typography className="text_cards white_text">1/2</Typography>
               <Typography className="text_cards white_text">2/2</Typography>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={9} className="white_box">
               <Typography className="text_cards green_text">
                 R$ 20000
               </Typography>
