@@ -1,0 +1,17 @@
+.padding_form {
+  padding-top: 10px;
+}
+
+.todo-completed {
+  text-decoration: line-through;
+}
+
+.grid_table {
+  width: 100%;
+  padding: 10px;
+}
+
+.name_checkbox {
+  display: flex;
+  align-items: center;
+}

@@ -40,3 +40,19 @@ code {
 .white_text {
   color: #ffff;
 }
+
+.title_with_buttons {
+  justify-content: space-between;
+}
+
+.add_button {
+  color: #35794b;
+}
+
+.delete_button {
+  color: #d81f1f;
+}
+.cancel_button {
+  color: #d81f1f;
+  padding: 9px;
+}
