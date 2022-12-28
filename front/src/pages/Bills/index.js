@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import "./index.css";
 import { Checkbox, Grid, TextField, InputLabel, Button } from "@mui/material";
 import BasicModal from "../../components/Modal";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useForm, Controller } from "react-hook-form";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { getRows, postRow, deleteRow, editRow } from "../../API/AddIncoming";
+import { getBills, postBill, deleteBill, editBill } from "../../API/Bills.api";
 import DefaultTable from "../../components/Table";
 import TitleWithButtons from "../../components/TitleWithButtons";
 
-export default function CustomizedTables() {
-  const [addNewIncoming, setAddNewIncoming] = useState(false);
-  const [newRows, setNewRows] = useState([]);
+export default function Bills() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bills, setBills] = useState([]);
   const [deleteActive, setDeleteActive] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [currentRowId, setCurrentRowId] = useState();
-  const header = ["Fonte", "Valor", "Data", ""];
+  const [currentBillId, setCurrentBillId] = useState();
+  const header = ["Conta", "Valor", "Prazo", ""];
 
   const init = async () => {
-    await getRows().then((res) => {
-      setNewRows(res);
+    await getBills().then((res) => {
+      setBills(res);
     });
   };
 
@@ -44,32 +43,32 @@ export default function CustomizedTables() {
       isChecked: false,
     };
     edit
-      ? await editRow(currentRowId, payload)
+      ? await editBill(currentBillId, payload)
           .then(() => {
             init();
           })
           .finally(() => {
-            setAddNewIncoming(false);
+            setIsModalOpen(false);
             setEdit(false);
             reset();
           })
-      : await postRow(payload)
+      : await postBill(payload)
           .then(() => {
             init();
           })
           .finally(() => {
-            setAddNewIncoming(false);
+            setIsModalOpen(false);
             reset();
           });
   };
 
-  const handleClose = () => setAddNewIncoming(false);
+  const handleClose = () => setIsModalOpen(false);
   const newLine = () => {
-    setAddNewIncoming(true);
+    setIsModalOpen(true);
   };
 
   const handleDelete = async (id) => {
-    await deleteRow(id).then(() => init());
+    await deleteBill(id).then(() => init());
   };
 
   const toggleTask = async (row) => {
@@ -77,7 +76,7 @@ export default function CustomizedTables() {
       ...row,
       isChecked: !row.isChecked,
     };
-    await editRow(row.id, payload).then(() => {
+    await editBill(row.id, payload).then(() => {
       init();
     });
   };
@@ -87,12 +86,12 @@ export default function CustomizedTables() {
     setValue("font", row.font);
     setValue("money", row.value);
     setEdit(true);
-    setCurrentRowId(row.id);
-    setAddNewIncoming(true);
+    setCurrentBillId(row.id);
+    setIsModalOpen(true);
   };
 
   const handleCancel = () => {
-    setAddNewIncoming(false);
+    setIsModalOpen(false);
     setEdit(false);
     reset();
   };
@@ -100,14 +99,14 @@ export default function CustomizedTables() {
   return (
     <Grid className="grid_table">
       <TitleWithButtons
-        title="Renda"
+        title="Contas"
         handleCancel={() => setDeleteActive(false)}
         handleDelete={() => setDeleteActive(true)}
         deleteActive={deleteActive}
         handleAdd={newLine}
       />
       <DefaultTable
-        rows={newRows}
+        rows={bills}
         rowsHeader={header}
         handleDelete={handleDelete}
         toggleTask={toggleTask}
@@ -115,7 +114,7 @@ export default function CustomizedTables() {
         handleEdit={handleEdit}
       />
       <BasicModal
-        open={addNewIncoming}
+        open={isModalOpen}
         handleClose={handleClose}
         title={edit ? "Edite sua renda" : "Add sua nova renda"}
       >
@@ -187,8 +186,8 @@ export default function CustomizedTables() {
               )}
             />
             <Grid container>
-              <Button type="submit">Salvar</Button>
               <Button onClick={handleCancel}>Cancelar</Button>
+              <Button type="submit">Salvar</Button>
             </Grid>
           </form>
         </Grid>
