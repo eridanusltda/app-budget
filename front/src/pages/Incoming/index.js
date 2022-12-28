@@ -24,15 +24,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useForm, Controller } from "react-hook-form";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment";
-import { getRows, postRow, deleteRow } from "../../API/AddIncoming";
+import { getRows, postRow, deleteRow, editRow } from "../../API/AddIncoming";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   padding: "10px",
   height: "100%",
-  tableCell: {
-    color: "red",
-  },
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#35794b",
     color: theme.palette.common.white,
@@ -51,10 +49,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const StyledTypography = styled(Typography)(({ theme }) => ({
+  fontSize: 13,
+}));
+
+const StyledCheckbox = styled(Checkbox)(() => ({
+  padding: "0 5px 0 0",
+}));
+
 export default function CustomizedTables() {
   const [addNewIncoming, setAddNewIncoming] = useState(false);
   const [newRows, setNewRows] = useState([]);
   const [deleteActive, setDeleteActive] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [currentRowId, setCurrentRowId] = useState();
 
   const init = async () => {
     await getRows().then((res) => {
@@ -66,26 +74,39 @@ export default function CustomizedTables() {
     init();
   }, []);
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
       font: "",
       money: "",
       dueDate: "",
     },
   });
+
   const onSubmit = async (data) => {
     const payload = {
       font: data.font,
-      value: data.money,
+      value: parseInt(data.money),
       date: data.dueDate,
       isChecked: false,
     };
-    await postRow(payload).then(() => {
-      init();
-    });
-
-    setAddNewIncoming(false);
-    reset();
+    edit
+      ? await editRow(currentRowId, payload)
+          .then(() => {
+            init();
+          })
+          .finally(() => {
+            setAddNewIncoming(false);
+            setEdit(false);
+            reset();
+          })
+      : await postRow(payload)
+          .then(() => {
+            init();
+          })
+          .finally(() => {
+            setAddNewIncoming(false);
+            reset();
+          });
   };
 
   const handleClose = () => setAddNewIncoming(false);
@@ -97,11 +118,31 @@ export default function CustomizedTables() {
     await deleteRow(id).then(() => init());
   };
 
-  const toggleTask = (index) => {
-    const newTasks = [...newRows];
-    newTasks[index].isChecked = !newTasks[index].isChecked;
-    setNewRows(newTasks);
+  const toggleTask = async (row) => {
+    const payload = {
+      ...row,
+      isChecked: !row.isChecked,
+    };
+    await editRow(row.id, payload).then(() => {
+      init();
+    });
   };
+
+  const handleEdit = async (row) => {
+    setValue("dueDate", row.date);
+    setValue("font", row.font);
+    setValue("money", row.value);
+    setEdit(true);
+    setCurrentRowId(row.id);
+    setAddNewIncoming(true);
+  };
+
+  const handleCancel = () => {
+    setAddNewIncoming(false);
+    setEdit(false);
+    reset();
+  };
+
   return (
     <Grid className="grid_table">
       <Grid container className="title_with_buttons">
@@ -125,9 +166,10 @@ export default function CustomizedTables() {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell className="tableCell">Fonte</StyledTableCell>
+              <StyledTableCell>Fonte</StyledTableCell>
               <StyledTableCell>Valor</StyledTableCell>
               <StyledTableCell>Data</StyledTableCell>
+              <StyledTableCell></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -141,19 +183,30 @@ export default function CustomizedTables() {
                         onClick={() => handleDelete(row.id)}
                       />
                     ) : (
-                      <Checkbox
+                      <StyledCheckbox
                         checked={row.isChecked}
                         color="success"
-                        onClick={() => toggleTask(index)}
+                        onClick={() => toggleTask(row)}
                       />
                     )}
-                    <Typography className={row.isChecked && "todo-completed"}>
+                    <StyledTypography
+                      className={row.isChecked && "todo-completed"}
+                    >
                       {row.font}
-                    </Typography>
+                    </StyledTypography>
                   </Grid>
                 </StyledTableCell>
-                <StyledTableCell>R$ {row.value}</StyledTableCell>
-                <StyledTableCell>{row.date}</StyledTableCell>
+                <StyledTableCell>
+                  <StyledTypography>R$ {row.value}</StyledTypography>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <StyledTypography>
+                    {moment(row.date).format("l")}
+                  </StyledTypography>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <EditIcon onClick={() => handleEdit(row)} />
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -162,7 +215,7 @@ export default function CustomizedTables() {
       <BasicModal
         open={addNewIncoming}
         handleClose={handleClose}
-        title="Add sua nova renda"
+        title={edit ? "Edite sua renda" : "Add sua nova renda"}
       >
         <Grid>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -190,7 +243,6 @@ export default function CustomizedTables() {
               render={({ field, fieldState: { error } }) => (
                 <TextField
                   {...field}
-                  mask="R$"
                   type="number"
                   error={!!error}
                   helperText={error && error.message}
@@ -234,7 +286,7 @@ export default function CustomizedTables() {
             />
             <Grid container>
               <Button type="submit">Salvar</Button>
-              <Button onClick={getRows}>Cancelar</Button>
+              <Button onClick={handleCancel}>Cancelar</Button>
             </Grid>
           </form>
         </Grid>

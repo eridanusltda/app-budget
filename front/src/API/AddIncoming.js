@@ -25,5 +25,13 @@ async function deleteRow(id) {
   });
   return data;
 }
+async function editRow(id, payload) {
+  const { data } = await axios({
+    method: "put",
+    url: `http://localhost:3004/rows/${id}`,
+    data: payload,
+  });
+  return data;
+}
 
-export { postRow, getRows, deleteRow };
+export { postRow, getRows, deleteRow, editRow };
