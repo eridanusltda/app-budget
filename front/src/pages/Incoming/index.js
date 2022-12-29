@@ -10,7 +10,7 @@ import { getRows, postRow, deleteRow, editRow } from "../../API/AddIncoming";
 import DefaultTable from "../../components/Table";
 import TitleWithButtons from "../../components/TitleWithButtons";
 
-export default function CustomizedTables() {
+export default function Incoming() {
   const [addNewIncoming, setAddNewIncoming] = useState(false);
   const [newRows, setNewRows] = useState([]);
   const [deleteActive, setDeleteActive] = useState(false);
@@ -117,7 +117,7 @@ export default function CustomizedTables() {
       <BasicModal
         open={addNewIncoming}
         handleClose={handleClose}
-        title={edit ? "Edite sua renda" : "Add sua nova renda"}
+        title={edit ? "Edite sua renda" : "Adicione uma renda"}
       >
         <Grid>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -186,7 +186,7 @@ export default function CustomizedTables() {
                 </Grid>
               )}
             />
-            <Grid container>
+            <Grid container justifyContent="space-between">
               <Button type="submit">Salvar</Button>
               <Button onClick={handleCancel}>Cancelar</Button>
             </Grid>
