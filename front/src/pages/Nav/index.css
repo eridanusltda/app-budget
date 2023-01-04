@@ -2,3 +2,7 @@
   max-width: 100%;
   display: flex;
 }
+
+.button_nav {
+  min-width: 50px;
+}

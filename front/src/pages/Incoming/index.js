@@ -167,7 +167,7 @@ export default function Incoming() {
                     error={!!error}
                     value={value}
                     helperText={error && error.message}
-                    views={["year", "month", "date"]}
+                    views={["day", "month", "year"]}
                     onChange={onChange}
                     renderInput={(params) => (
                       <TextField variant="standard" {...params} />

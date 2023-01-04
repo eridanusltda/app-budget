@@ -1,15 +1,21 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import MoneyOffIcon from "@mui/icons-material/MoneyOff";
-import CalculateIcon from "@mui/icons-material/Calculate";
 import WalletIcon from "@mui/icons-material/Wallet";
 import SavingsIcon from "@mui/icons-material/Savings";
-import HistoryIcon from "@mui/icons-material/History";
 import { useNavigate } from "react-router-dom";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import HistoryIcon from "@mui/icons-material/History";
 import "./index.css";
+
+const StyledNavButtom = styled(BottomNavigationAction)(() => ({
+  minWidth: "50px",
+  flexDirection: "column",
+}));
 
 export default function Nav() {
   const navigate = useNavigate();
@@ -26,36 +32,37 @@ export default function Nav() {
           navigate(newValue);
         }}
       >
-        <BottomNavigationAction
+        <StyledNavButtom
           label="Carteira"
           icon={<WalletIcon />}
           value="/carteira"
+          className="button_nav"
         />
-        <BottomNavigationAction
+        <StyledNavButtom
           label="Renda"
           icon={<AttachMoneyIcon />}
           value="/renda"
         />
-        <BottomNavigationAction
+        <StyledNavButtom
           label="Gastos"
           icon={<MoneyOffIcon />}
           value="/gastos"
         />
-        <BottomNavigationAction
+        <StyledNavButtom
           label="Cofrinho"
           icon={<SavingsIcon />}
           value="/cofre"
         />
-        {/* <BottomNavigationAction
+        <StyledNavButtom
+          label="Calc"
+          icon={<CalculateIcon />}
+          value="/calculadora"
+        />
+        <StyledNavButtom
           label="Histórico"
           icon={<HistoryIcon />}
           value="/historico"
         />
-        <BottomNavigationAction
-          label="Calculadora"
-          icon={<CalculateIcon />}
-          value="/calc"
-        /> */}
       </BottomNavigation>
     </Box>
   );

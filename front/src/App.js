@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Wallet from "./pages/Wallet";
 import Incoming from "./pages/Incoming";
 import Bills from "./pages/Bills";
+import CalculatorPage from "./pages/CalculatorPage";
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
           <Route path="/carteira" element={<Wallet />} />
           <Route path="/renda" element={<Incoming />} />
           <Route path="/gastos" element={<Bills />} />
+          <Route path="/calculadora" element={<CalculatorPage />} />
           <Route path="/carteira" element={<Wallet />} />
-          <Route path="/carteira" element={<Wallet />} />
-          <Route path="/carteira" element={<Wallet />} />
+          <Route path="/historico" element={<Wallet />} />
         </Routes>
         <Nav />
       </Grid>

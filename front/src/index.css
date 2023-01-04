@@ -56,3 +56,7 @@ code {
   color: #d81f1f;
   padding-right: 5px;
 }
+
+.shadow {
+  box-shadow: -2px 2px 6px 0px rgb(0 0 0 / 14%);
+}

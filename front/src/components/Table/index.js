@@ -47,15 +47,15 @@ export default function DefaultTable(props) {
       <Table aria-label="customized table">
         <TableHead>
           <TableRow>
-            {props.rowsHeader.map((header) => (
-              <StyledTableCell>{header}</StyledTableCell>
+            {props.rowsHeader.map((header, index) => (
+              <StyledTableCell key={index}>{header}</StyledTableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {props.rows &&
-            props.rows.map((row) => (
-              <StyledTableRow key={row.name}>
+            props.rows.map((row, index) => (
+              <StyledTableRow key={index}>
                 <StyledTableCell>
                   <Grid className="name_checkbox">
                     {props.deleteActive ? (

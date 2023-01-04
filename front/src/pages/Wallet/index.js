@@ -1,19 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography } from "@mui/material";
 import "./index.css";
+import { Grid, Typography } from "@mui/material";
 import CardAccordion from "../../components/CardAccordion";
 import Card from "../../components/Card";
 import { getRows } from "../../API/AddIncoming";
+import { getBills } from "../../API/Bills.api";
 
 export default function Wallet() {
   const [incoming, setIncoming] = useState(0);
+  const [spending, setSpending] = useState(0);
+  const [bills, setBills] = useState(0);
+  const [paidBills, setPaidBills] = useState(0);
+  const [profit, setProfit] = useState(0);
+
   const init = async () => {
-    await getRows().then((res) => {
-      let newIncoming = 0;
-      res.map((item) => {
+    let newIncoming = 0;
+    let newSpending = 0;
+    let newPaidBills = 0;
+    let newBills = 0;
+
+    await Promise.all([getRows(), getBills()]).then((res) => {
+      res[0].map((item) => {
         newIncoming = newIncoming + item.value;
       });
+
+      res[1].map((item) => {
+        newSpending = newSpending + item.value;
+        if (item.isChecked) {
+          newPaidBills = newPaidBills + 1;
+        } else {
+          newBills = newBills + 1;
+        }
+      });
+      setPaidBills(newPaidBills);
+      setBills(newBills);
       setIncoming(newIncoming);
+      setSpending(newSpending);
+      setProfit(newIncoming - newSpending);
     });
   };
 
@@ -27,10 +50,10 @@ export default function Wallet() {
         Carteira
       </Typography>
       <CardAccordion title="Renda" value={`R$ ${incoming}`} />
-      <Card title="Gastos" value="- R$ 1200" isRed />
-      <Card title="Contas" value="3" isRed />
-      <Card title="Contas Pagas" value="1" isRed={false} />
-      <Card title="Sobras" value="R$ 14000" isRed={false} />
+      <Card title="Gastos" value={`R$ ${spending}`} isRed />
+      <Card title="Contas a Pagar" value={bills} isRed hasBigTitle />
+      <Card title="Contas Pagas" value={paidBills} isRed={false} hasBigTitle />
+      <Card title="Sobras" value={`R$ ${profit}`} isRed={false} />
     </Grid>
   );
 }

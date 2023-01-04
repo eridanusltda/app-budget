@@ -51,7 +51,7 @@ export default function CardAccordion(props) {
   };
 
   return (
-    <div>
+    <div className="shadow">
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}

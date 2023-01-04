@@ -1,13 +1,6 @@
 {
   "rows": [
     {
-      "font": "Salário Peter 2",
-      "value": 4000,
-      "date": "2018-04-01T03:00:00.000Z",
-      "isChecked": false,
-      "id": 3
-    },
-    {
       "font": "Salário Peter 1/2",
       "value": 1900,
       "date": "2021-05-01T03:00:00.000Z",
@@ -20,7 +13,22 @@
       "date": "2020-08-01T03:00:00.000Z",
       "isChecked": false,
       "id": 5
+    },
+    {
+      "font": "Salario nath 1/2",
+      "value": 16000,
+      "date": "2024-05-01T03:00:00.000Z",
+      "isChecked": false,
+      "id": 6
     }
   ],
-  "bills": []
+  "bills": [
+    {
+      "font": "Test123",
+      "value": 2211,
+      "date": "2023-07-01T03:00:00.000Z",
+      "isChecked": true,
+      "id": 1
+    }
+  ]
 }
