@@ -1,0 +1,24 @@
+.child[data-isOpen="true"] {
+  width: 100%;
+}
+
+.child {
+  width: 50%;
+  background: rgba(255, 255, 255, 0.93);
+  border-radius: 0px 10px;
+}
+
+.grid_card_details {
+  background-color: #35794b;
+  border-radius: 0px 12px;
+  align-items: center;
+}
+
+.card {
+  margin-top: 10px;
+  border-radius: 0px 12px;
+}
+
+.grid_card {
+  width: 100%;
+}

@@ -50,9 +50,9 @@ export default function Wallet() {
         Carteira
       </Typography>
       <CardAccordion title="Renda" value={`R$ ${incoming}`} />
-      <Card title="Gastos" value={`R$ ${spending}`} isRed />
-      <Card title="Contas a Pagar" value={bills} isRed hasBigTitle />
-      <Card title="Contas Pagas" value={paidBills} isRed={false} hasBigTitle />
+      <Card title="Gastos" value={`R$ ${spending}`} isRed activateMotion />
+      <Card title="Contas a Pagar" value={bills} isRed />
+      <Card title="Contas Pagas" value={paidBills} isRed={false} />
       <Card title="Sobras" value={`R$ ${profit}`} isRed={false} />
     </Grid>
   );

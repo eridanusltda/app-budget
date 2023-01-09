@@ -15,6 +15,15 @@ import "./index.css";
 const StyledNavButtom = styled(BottomNavigationAction)(() => ({
   minWidth: "50px",
   flexDirection: "column",
+  "&:focus": {
+    color: "#35794b",
+  },
+  "&:active": {
+    color: "#35794b",
+  },
+  "&.Mui-selected": {
+    color: "#35794b",
+  },
 }));
 
 export default function Nav() {

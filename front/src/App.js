@@ -8,6 +8,7 @@ import Wallet from "./pages/Wallet";
 import Incoming from "./pages/Incoming";
 import Bills from "./pages/Bills";
 import CalculatorPage from "./pages/CalculatorPage";
+import History from "./pages/History";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/gastos" element={<Bills />} />
           <Route path="/calculadora" element={<CalculatorPage />} />
           <Route path="/carteira" element={<Wallet />} />
-          <Route path="/historico" element={<Wallet />} />
+          <Route path="/historico" element={<History />} />
         </Routes>
         <Nav />
       </Grid>

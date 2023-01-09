@@ -30,5 +30,35 @@
       "isChecked": true,
       "id": 1
     }
+  ],
+  "history": [
+    {
+      "month": "Dezembro",
+      "incoming": 12000,
+      "spending": 13000,
+      "bills": [
+        {
+          "font": "Test123",
+          "value": 2211,
+          "date": "2023-07-01T03:00:00.000Z",
+          "isChecked": true,
+          "id": 1
+        }
+      ]
+    },
+    {
+      "month": "Janeiro",
+      "incoming": 22000,
+      "spending": 13000,
+      "bills": [
+        {
+          "font": "Test123",
+          "value": 2211,
+          "date": "2023-07-01T03:00:00.000Z",
+          "isChecked": true,
+          "id": 1
+        }
+      ]
+    }
   ]
 }
