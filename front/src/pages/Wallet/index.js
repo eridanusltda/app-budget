@@ -6,9 +6,14 @@ import Card from "../../components/Card";
 import { getRows } from "../../API/AddIncoming";
 import { getBills } from "../../API/Bills.api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import NavSlice from "../../store/reducers/NavReducers";
+import HistorySlice from "../../store/reducers/HistoryReducers";
 
 export default function Wallet() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navRedux = useSelector((state) => state.navReducers);
   const [incoming, setIncoming] = useState(0);
   const [spending, setSpending] = useState(0);
   const [bills, setBills] = useState(0);
@@ -46,6 +51,11 @@ export default function Wallet() {
     init();
   }, []);
 
+  const changePage = (route) => {
+    navigate(route);
+    dispatch(NavSlice.actions.CHANGE_PAGE(route));
+  };
+
   return (
     <Grid className="section_grid">
       <Typography variant="h5" className="title">
@@ -54,14 +64,14 @@ export default function Wallet() {
       <CardAccordion
         title="Renda"
         value={`R$ ${incoming}`}
-        afterEffect={() => navigate("/renda")}
+        afterEffect={() => changePage("/renda")}
       />
       <Card
         title="Gastos"
         value={`R$ ${spending}`}
         isRed
         activateMotion
-        afterEffect={() => navigate("/gastos")}
+        afterEffect={() => changePage("/gastos")}
       />
       <Card title="Contas a Pagar" value={bills} isRed />
       <Card title="Contas Pagas" value={paidBills} isRed={false} />

@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./index.css";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -10,7 +11,9 @@ import SavingsIcon from "@mui/icons-material/Savings";
 import { useNavigate } from "react-router-dom";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import HistoryIcon from "@mui/icons-material/History";
-import "./index.css";
+import { useDispatch, useSelector } from "react-redux";
+import NavSlice from "../../store/reducers/NavReducers";
+import HistorySlice from "../../store/reducers/HistoryReducers";
 
 const StyledNavButtom = styled(BottomNavigationAction)(() => ({
   minWidth: "50px",
@@ -28,16 +31,18 @@ const StyledNavButtom = styled(BottomNavigationAction)(() => ({
 
 export default function Nav() {
   const navigate = useNavigate();
-  const [value, setValue] = React.useState(0);
+  const dispatch = useDispatch();
+  const navRedux = useSelector((state) => state.navReducers);
 
   return (
     <Box sx={{ width: "100%", alignItems: "flex-end", display: "flex" }}>
       <BottomNavigation
         showLabels
         sx={{ width: "100%" }}
-        value={value}
+        value={navRedux.currentPage}
         onChange={(event, newValue) => {
-          setValue(newValue);
+          dispatch(NavSlice.actions.CHANGE_PAGE(newValue));
+          dispatch(HistorySlice.actions.OPEN_MONTH(false));
           navigate(newValue);
         }}
       >

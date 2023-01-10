@@ -4,10 +4,13 @@ import { Grid, Typography } from "@mui/material";
 import Card from "../../components/Card";
 import { getHistory } from "../../API/History";
 import DefaultTable from "../../components/Table";
+import { useDispatch, useSelector } from "react-redux";
+import HistorySlice from "../../store/reducers/HistoryReducers";
 
 export default function History() {
+  const dispatch = useDispatch();
+  const historyRedux = useSelector((state) => state.historyReducers);
   const [history, setHistory] = useState([]);
-  const [openMonth, setOpenMonth] = useState(false);
   const [rows, setRows] = useState([]);
   const headers = ["Conta", "Valor", "Prazo", ""];
 
@@ -19,12 +22,11 @@ export default function History() {
 
   useEffect(() => {
     init();
-    setOpenMonth(false);
   }, []);
 
   const changeOpenedMonth = (bills) => {
     setRows(bills);
-    setOpenMonth(true);
+    dispatch(HistorySlice.actions.OPEN_MONTH(true));
   };
 
   return (
@@ -32,7 +34,7 @@ export default function History() {
       <Typography variant="h5" className="title">
         Historico
       </Typography>
-      {openMonth ? (
+      {historyRedux.openMonth ? (
         <DefaultTable rows={rows} rowsHeader={headers} />
       ) : (
         history.map((item, index) => {
