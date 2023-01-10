@@ -5,8 +5,10 @@ import CardAccordion from "../../components/CardAccordion";
 import Card from "../../components/Card";
 import { getRows } from "../../API/AddIncoming";
 import { getBills } from "../../API/Bills.api";
+import { useNavigate } from "react-router-dom";
 
 export default function Wallet() {
+  const navigate = useNavigate();
   const [incoming, setIncoming] = useState(0);
   const [spending, setSpending] = useState(0);
   const [bills, setBills] = useState(0);
@@ -49,8 +51,18 @@ export default function Wallet() {
       <Typography variant="h5" className="title">
         Carteira
       </Typography>
-      <CardAccordion title="Renda" value={`R$ ${incoming}`} />
-      <Card title="Gastos" value={`R$ ${spending}`} isRed activateMotion />
+      <CardAccordion
+        title="Renda"
+        value={`R$ ${incoming}`}
+        afterEffect={() => navigate("/renda")}
+      />
+      <Card
+        title="Gastos"
+        value={`R$ ${spending}`}
+        isRed
+        activateMotion
+        afterEffect={() => navigate("/gastos")}
+      />
       <Card title="Contas a Pagar" value={bills} isRed />
       <Card title="Contas Pagas" value={paidBills} isRed={false} />
       <Card title="Sobras" value={`R$ ${profit}`} isRed={false} />

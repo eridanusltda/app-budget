@@ -38,8 +38,8 @@
       "spending": 13000,
       "bills": [
         {
-          "font": "Test123",
-          "value": 2211,
+          "font": "Test Dezembro",
+          "value": 32,
           "date": "2023-07-01T03:00:00.000Z",
           "isChecked": true,
           "id": 1

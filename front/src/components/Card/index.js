@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Grid } from "@mui/material";
 import "./index.css";
 import { motion } from "framer-motion/dist/framer-motion";
 
 export default function Card(props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen && props.activateMotion) {
+      setTimeout(() => {
+        props.afterEffect();
+      }, 500);
+    }
+  }, [isOpen]);
 
   return (
     <Grid container className="grid_card_details card shadow">
