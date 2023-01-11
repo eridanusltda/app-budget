@@ -6,3 +6,8 @@
 .button_nav {
   min-width: 50px;
 }
+
+.stickToBottom {
+  position: fixed;
+  bottom: 0;
+}

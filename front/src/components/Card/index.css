@@ -2,6 +2,10 @@
   margin-top: 10px;
   border-radius: 0px 12px;
 }
+.card_small_margin {
+  margin-top: 2px;
+  border-radius: 0px 12px;
+}
 
 .grid_card {
   width: 100%;

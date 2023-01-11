@@ -37,6 +37,7 @@ export default function Nav() {
   return (
     <Box sx={{ width: "100%", alignItems: "flex-end", display: "flex" }}>
       <BottomNavigation
+        className="stickToBottom"
         showLabels
         sx={{ width: "100%" }}
         value={navRedux.currentPage}
@@ -68,14 +69,14 @@ export default function Nav() {
           value="/cofre"
         />
         <StyledNavButtom
+          label="Histórico"
+          icon={<HistoryIcon />}
+          value={`/historico`}
+        />
+        <StyledNavButtom
           label="Calc"
           icon={<CalculateIcon />}
           value="/calculadora"
-        />
-        <StyledNavButtom
-          label="Histórico"
-          icon={<HistoryIcon />}
-          value="/historico"
         />
       </BottomNavigation>
     </Box>

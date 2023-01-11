@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./index.css";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
@@ -17,6 +18,11 @@ const Accordion = styled((props) => (
   },
   "&:before": {
     display: "none",
+  },
+  "&.Mui-expanded": {
+    ":first-of-type": {
+      marginTop: "10px",
+    },
   },
 }));
 
@@ -64,26 +70,44 @@ export default function CardAccordion(props) {
               </Typography>
             </Grid>
             <Grid item xs={9} className="white_box">
-              <Typography className="text_cards green_text">
-                {props.value}
+              <Typography
+                className={`text_cards ${
+                  props.value < 0 ? "red_text" : "green_text"
+                }`}
+              >
+                R$ {props.value}
               </Typography>
             </Grid>
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container className="grid_card_details">
-            <Grid item xs={3} className="green_box">
-              <Typography className="text_cards white_text">1/2</Typography>
-              <Typography className="text_cards white_text">2/2</Typography>
-            </Grid>
-            <Grid item xs={9} className="white_box">
-              <Typography className="text_cards green_text">
-                R$ 20000
-              </Typography>
-              <Typography className="text_cards green_text">
-                R$ 11000
-              </Typography>
-            </Grid>
+          <Grid className="accordion_container">
+            {props.accordionComponent
+              ? props.accordionComponent
+              : props.accordionDetails.map((item) => {
+                  return (
+                    <Grid container className="grid_card_details">
+                      <Grid item xs={3} className="green_box">
+                        {item.titles.map((title) => {
+                          return (
+                            <Typography className="text_cards white_text">
+                              {title}
+                            </Typography>
+                          );
+                        })}
+                      </Grid>
+                      <Grid item xs={9} className="white_box">
+                        {item.values.map((value) => {
+                          return (
+                            <Typography className="text_cards green_text">
+                              {value}
+                            </Typography>
+                          );
+                        })}
+                      </Grid>
+                    </Grid>
+                  );
+                })}
           </Grid>
         </AccordionDetails>
       </Accordion>

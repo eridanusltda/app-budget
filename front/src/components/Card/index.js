@@ -15,7 +15,12 @@ export default function Card(props) {
   }, [isOpen]);
 
   return (
-    <Grid container className="grid_card_details card shadow">
+    <Grid
+      container
+      className={`grid_card_details ${
+        props.hasSmallMargin ? "card_small_margin" : "card"
+      } shadow`}
+    >
       {!isOpen && (
         <Grid className="green_box">
           <Typography className="text_cards white_text">

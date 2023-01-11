@@ -21,10 +21,10 @@ function App() {
           <Route path="/gastos" element={<Bills />} />
           <Route path="/calculadora" element={<CalculatorPage />} />
           <Route path="/carteira" element={<Wallet />} />
-          <Route path="/historico" element={<History />} />
+          <Route path={`/historico/:month?/:year?`} element={<History />} />
         </Routes>
-        <Nav />
       </Grid>
+      <Nav />
     </Router>
   );
 }

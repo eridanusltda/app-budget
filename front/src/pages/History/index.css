@@ -22,3 +22,8 @@
 .grid_card {
   width: 100%;
 }
+
+.max_height {
+  max-height: 82vh;
+  overflow: scroll;
+}

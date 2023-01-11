@@ -19,6 +19,9 @@ export default function Wallet() {
   const [bills, setBills] = useState(0);
   const [paidBills, setPaidBills] = useState(0);
   const [profit, setProfit] = useState(0);
+  const incomingArray = [
+    { titles: ["1/2", "2/2"], values: ["R$1200", "R$1200"] },
+  ];
 
   const init = async () => {
     let newIncoming = 0;
@@ -65,6 +68,7 @@ export default function Wallet() {
         title="Renda"
         value={`R$ ${incoming}`}
         afterEffect={() => changePage("/renda")}
+        accordionDetails={incomingArray}
       />
       <Card
         title="Gastos"

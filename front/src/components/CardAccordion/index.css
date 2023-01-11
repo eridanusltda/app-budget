@@ -1,0 +1,4 @@
+.accordion_container {
+  max-height: 20vh;
+  overflow: scroll;
+}
