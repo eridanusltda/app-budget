@@ -6,14 +6,12 @@ import Card from "../../components/Card";
 import { getRows } from "../../API/AddIncoming";
 import { getBills } from "../../API/Bills.api";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import NavSlice from "../../store/reducers/NavReducers";
-import HistorySlice from "../../store/reducers/HistoryReducers";
 
 export default function Wallet() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navRedux = useSelector((state) => state.navReducers);
   const [incoming, setIncoming] = useState(0);
   const [spending, setSpending] = useState(0);
   const [bills, setBills] = useState(0);
@@ -77,9 +75,27 @@ export default function Wallet() {
         activateMotion
         afterEffect={() => changePage("/gastos")}
       />
-      <Card title="Contas a Pagar" value={bills} isRed />
-      <Card title="Contas Pagas" value={paidBills} isRed={false} />
-      <Card title="Sobras" value={`R$ ${profit}`} isRed={false} />
+      <Card
+        title="Contas a Pagar"
+        value={bills}
+        isRed
+        activateMotion
+        afterEffect={() => changePage("/gastos")}
+      />
+      <Card
+        title="Contas Pagas"
+        value={paidBills}
+        isRed={false}
+        activateMotion
+        afterEffect={() => changePage("/gastos")}
+      />
+      <Card
+        title="Sobras"
+        value={`R$ ${profit}`}
+        isRed={false}
+        activateMotion
+        afterEffect={() => changePage("/cofre")}
+      />
     </Grid>
   );
 }
