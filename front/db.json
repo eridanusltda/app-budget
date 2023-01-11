@@ -20,6 +20,14 @@
       "date": "2024-05-01T03:00:00.000Z",
       "isChecked": false,
       "id": 6
+    },
+    {
+      "font": "Lalal",
+      "value": 515,
+      "date": "2021-04-10T03:00:00.000Z",
+      "isChecked": false,
+      "recurrent": true,
+      "id": 7
     }
   ],
   "bills": [

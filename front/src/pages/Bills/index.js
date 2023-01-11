@@ -41,6 +41,7 @@ export default function Bills() {
       value: parseInt(data.money),
       date: data.dueDate,
       isChecked: false,
+      recurrent: data.recurrent,
     };
     edit
       ? await editBill(currentBillId, payload)

@@ -42,6 +42,7 @@ export default function Incoming() {
       value: parseInt(data.money),
       date: data.dueDate,
       isChecked: false,
+      recurrent: data.recurrent,
     };
     edit
       ? await editRow(currentRowId, payload)

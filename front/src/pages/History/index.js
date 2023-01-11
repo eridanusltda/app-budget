@@ -46,7 +46,7 @@ export default function History() {
         <DefaultTable rows={rows} rowsHeader={headers} />
       ) : (
         <Grid className="max_height">
-          {history.map((year, index) => {
+          {history.map((year) => {
             return (
               <CardAccordion
                 title={year.year}
