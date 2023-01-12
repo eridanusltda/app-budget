@@ -14,6 +14,8 @@ import HistoryIcon from "@mui/icons-material/History";
 import { useDispatch, useSelector } from "react-redux";
 import NavSlice from "../../store/reducers/NavReducers";
 import HistorySlice from "../../store/reducers/HistoryReducers";
+import { ReactComponent as PigIcon } from "../../assets/savings.svg";
+import { ReactComponent as PigIconGreen } from "../../assets/savings_green.svg";
 
 const StyledNavButtom = styled(BottomNavigationAction)(() => ({
   minWidth: "50px",
@@ -65,7 +67,13 @@ export default function Nav() {
         />
         <StyledNavButtom
           label="Cofrinho"
-          icon={<SavingsIcon />}
+          icon={
+            navRedux.currentPage === "/cofre" ? (
+              <PigIconGreen style={{ maxWidth: 24 }} />
+            ) : (
+              <PigIcon style={{ maxWidth: 24 }} />
+            )
+          }
           value="/cofre"
         />
         <StyledNavButtom

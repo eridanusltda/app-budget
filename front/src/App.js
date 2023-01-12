@@ -9,6 +9,7 @@ import Incoming from "./pages/Incoming";
 import Bills from "./pages/Bills";
 import CalculatorPage from "./pages/CalculatorPage";
 import History from "./pages/History";
+import Profit from "./pages/Profit";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/renda" element={<Incoming />} />
           <Route path="/gastos" element={<Bills />} />
           <Route path="/calculadora" element={<CalculatorPage />} />
-          <Route path="/carteira" element={<Wallet />} />
+          <Route path="/cofre" element={<Profit />} />
           <Route path={`/historico/:month?/:year?`} element={<History />} />
         </Routes>
       </Grid>

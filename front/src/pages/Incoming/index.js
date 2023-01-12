@@ -102,7 +102,7 @@ export default function Incoming() {
     <Grid className="grid_table">
       <TitleWithButtons
         title="Renda"
-        handleCancel={() => setDeleteActive(false)}
+        handleClose={() => setDeleteActive(false)}
         handleDelete={() => setDeleteActive(true)}
         deleteActive={deleteActive}
         handleAdd={newLine}

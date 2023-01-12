@@ -248,5 +248,8 @@
         }
       ]
     }
-  ]
+  ],
+  "savings": {
+    "currentBalance": "-5000"
+  }
 }

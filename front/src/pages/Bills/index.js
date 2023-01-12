@@ -101,7 +101,7 @@ export default function Bills() {
     <Grid className="grid_table">
       <TitleWithButtons
         title="Contas"
-        handleCancel={() => setDeleteActive(false)}
+        handleClose={() => setDeleteActive(false)}
         handleDelete={() => setDeleteActive(true)}
         deleteActive={deleteActive}
         handleAdd={newLine}
